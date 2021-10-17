@@ -1,0 +1,147 @@
+#include <iostream>
+#include "Node.h"
+#include "DLL.h"
+#pragma once
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node* next;
+    Node* prev;
+    Node(int d);
+};
+
+Node::Node(int d)
+{
+	data = d;
+	next = nullptr;
+	prev = nullptr;
+}
+
+class DLL
+{
+public:
+    Node* first;
+    Node* second;
+    Node* added;
+    int listsize;
+    DLL();
+    void push(Node* head, int integer);
+    void push2(Node* head, int integer);
+    void display(Node* node1, Node* node2);
+};
+
+DLL::DLL() {
+    first = nullptr;
+    listsize = 0;
+}
+
+void DLL::push(Node* head, int integer)
+{
+    if (first == nullptr)
+    {
+        first = head;
+        first->data = integer;
+    }
+    else
+    {
+        first->prev = head;
+        head->next = first;
+        first = head;
+        first->data = integer;
+    }
+}
+
+void DLL::push2(Node* head, int integer) 
+{
+    if (second == nullptr)
+    {
+        second = head;
+        second->data = integer;
+    }
+    else
+    {
+        second->prev = head;
+        head->next = second;
+        second = head;
+        second->data = integer;
+    }
+}
+
+void DLL::display(Node* node1, Node* node2)
+{
+    Node* current;
+    Node* current2;
+
+    cout << "p1(x) = ";
+    current = node1;
+    cout << current->data << " + ";
+    current = current->next;
+    for(int i = 1; current != nullptr; i++)
+    {
+        if (current->data != 0) {
+            cout << current->data;
+            current = current->next;
+            cout << "x^" << current->data;
+            if(current->next->data != 0)
+                cout << " + ";
+            current = current->next;
+        }
+    }
+    cout << "\n\n";
+
+    cout << "p2(x) = ";
+    current2 = node2;
+    cout << current2->data << " + ";
+    current2 = current2->next;
+    for (int i = 1; current2 != nullptr; i++)
+    {
+        if (current2->data != 0) {
+            cout << current2->data;
+            current2 = current2->next;
+            cout << "x^" << current2->data;
+            if (current2->next->data != 0)
+                cout << " + ";
+            current2 = current2->next;
+        }
+    }
+    cout << "\n\n";
+}
+
+int main()
+{
+    Node* n1 = new Node(1);
+    Node* n2 = new Node(2);
+    Node* n3 = new Node(3); 
+    Node* n4 = new Node(4);
+    Node* n5 = new Node(5);
+    Node* n6 = new Node(6);
+    Node* n7 = new Node(7);
+    Node* n8 = new Node(8);
+    Node* n9 = new Node(9);
+    Node* n21 = new Node(21);
+    Node* n22 = new Node(22);
+    Node* n23 = new Node(23);
+    Node* n24 = new Node(24);
+    Node* n25 = new Node(25);
+    DLL mylist;
+    mylist.push(n9, 99);
+    mylist.push(n5, 5);
+    mylist.push(n8, 25);
+    mylist.push(n4, 4);
+    mylist.push(n7, 12);
+    mylist.push(n3, 3);
+    mylist.push(n6, 3);
+    mylist.push(n2, 2);
+    mylist.push(n1, 1);
+    mylist.push2(n25, 12);
+    mylist.push2(n24, 13);
+    mylist.push2(n23, 4);
+    mylist.push2(n22, 9);
+    mylist.push2(n21, 1);
+    mylist.display(n1, n21);
+
+    return 0;
+}
